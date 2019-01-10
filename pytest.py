@@ -6,22 +6,34 @@ class Clause():
 
 class Equation():
     def __init__(self):
-        self.LiteralDictionary = [("a",1)]
+        self.LiteralDictionary = []
         self.ClauseArray = []
     def AddLiteral(self, tup):
         self.LiteralDictionary.append(tup)
     def AddCaluse(self):
         self.ClauseArray.append(Clause())
 
-
-eq = Equation()
-eq.AddLiteral(("b",1))
-eq.AddLiteral(("c",0))
-eq.AddLiteral(("d",1))
-eq.AddLiteral(("e",0))
-eq.AddLiteral(("f",1))
 doc = open("text.txt",'r')
 docList = list(doc.read())
+uniqueLiterals = []
+for item in docList:
+    for i in range(97,123):
+        if item is chr(i):
+            uniqueLiterals.append(item)
+
+for currentLiteral in uniqueLiterals:
+    num = 0
+    for literal in uniqueLiterals:
+        if currentLiteral == literal:
+            num+=1
+    for i in range(0,num-1):
+        uniqueLiterals.remove(currentLiteral)
+
+eq = Equation()
+for i in range(97, 97 + uniqueLiterals.__len__()-1):
+    value = input("Enter the value of" + " " + chr(i) + " ")
+    eq.AddLiteral([chr(i), value])
+
 docLength = docList.__len__()
 inc = -1
 for x in docList:
@@ -42,7 +54,6 @@ for letter in docList:
             docList[inc2] = str(literal[1])
 newEq = ''.join(docList)
 print(newEq)
-exit()
 '''Stuff to do:
     1. Allow the user to input the values of the literals
     2. Seperate classes into their own files and import them into a main
