@@ -55,7 +55,5 @@ for letter in docList:
 newEq = ''.join(docList)
 print(newEq)
 '''Stuff to do:
-    1. Allow the user to input the values of the literals
-    2. Seperate classes into their own files and import them into a main
-    3. Find out if there's a way to do a proper incrementing for loop
-    4. '''
+    1. Seperate classes into their own files and import them into a main
+    2. Find out if there's a way to do a proper incrementing for loop '''
