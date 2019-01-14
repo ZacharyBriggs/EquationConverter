@@ -1,8 +1,4 @@
-class Clause():
-    def __init__(self):
-        self.array = []
-    def Append(self,info):
-        self.array.append(info)
+from Clause import Clause
 
 class Equation():
     def __init__(self, eqString):
