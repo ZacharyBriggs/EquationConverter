@@ -3,10 +3,10 @@ class Clause():
         self.value = clause
         self.converted = []
 
-    def Append(self,info):
+    def append(self,info):
         self.value.append(info)
 
-    def Convert(self,literals):
+    def convert(self,literals):
         inc2 = -1
         for letter in self.value:
             inc2 += 1
@@ -19,23 +19,23 @@ class Clause():
                         
         self.converted = ''.join(self.value)
 
-    def Solve(self):
+    def solve(self):
         numT = 0
         for num in self.converted:
             if num == "1":
-                numTrues += 1
-        if(numTrues > 0):
+                numT += 1
+        if(numT > 0):
             return True
         else:
             return False
 
-literals = []
+'''literals = []
 literal1 = ["a",0]
 literal2 = ["c",1]
 literals.append(literal1)
 literals.append(literal2)
 string = "(!a+c)"
 clu = Clause(list(string))
-clu.Convert(literals)
-boolean = clu.Solve()
-a=1
+clu.convert(literals)
+boolean = clu.solve()
+a=1'''

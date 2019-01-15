@@ -1,7 +1,12 @@
 import random
+from Equation import Equation
+from Converter import Converter
 class Gene():
-    def __init__(self, values):
+    def __init__(self, values, equation):
         self.values = values
+        self.eq = equation
+        eq.setLiterals(values)
+        eq.convert()
         self.fitness = 0
 
     def mutate(self, chance):
@@ -24,10 +29,21 @@ class Gene():
             newGene.append(other.values[x])
         return newGene
 
-numbers = [1,0,1,1]
-numbers2 = [0,1,0,1]
-gene = Gene(numbers)
-gene2 = Gene(numbers2)
+    def determineFitness(self):
+        self.fitness = eq.solve()
+        return self.fitness
+
+doc = open("text.txt",'r')
+eq = Equation(doc.read())
+eq.findClauses()
+eq.findUniques()
+numbers = [1,0,1,1,1,0]
+numbers2 = [0,1,0,1,0,1]
+literals = []
+gene = Gene(numbers, eq)
+gene.determineFitness()
+gene2 = Gene(numbers2, eq)
+gene2.determineFitness()
 gene.mutate(25)
-corssGene = gene.crossover(gene2,2)
+crossGene = gene.crossover(gene2,2)
 a=1
