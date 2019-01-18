@@ -8,7 +8,8 @@ def RouletteWheel(nums):
     for i in range(0,nums.__len__()):
         inc += nums[i]
         if inc >= rand:
-            chosen = nums[i]
+            chosen = i
+            break
     return chosen
 
 
@@ -34,10 +35,27 @@ class GeneticAlgorithm():
 doc = open("text.txt",'r')
 eq = Equation(doc.read())
 ga = GeneticAlgorithm()
-ga.generatePop(6, eq.LiteralDictionary.__len__(), eq.string)
+ga.generatePop(4, eq.LiteralDictionary.__len__(), eq.string)
 ga.determinePopFitness()
-fitnessList = []
-for gene in ga.population:
-    fitnessList.append(gene.fitness)
-h = RouletteWheel(fitnessList)
+while(True):
+    answer = None
+    fitnessList = []
+    for gene in ga.population:
+        if gene.fitness == eq.ClauseArray.__len__():
+            answer = gene
+        fitnessList.append(gene.fitness)
+    if answer is not None:
+        break
+    parentA = ga.population[RouletteWheel(fitnessList)]
+    parentB = ga.population[RouletteWheel(fitnessList)]
+    parentA.mutate(25)
+    parentB.mutate(25)
+    kidA = parentA.crossover(parentB,5)
+    kidB = parentB.crossover(parentA,5)
+    ga.population.remove(parentA)
+    ga.population.remove(parentB)
+    ga.population.append(kidA)
+    ga.population.append(kidB)
+
+print(str(answer.values))
 a=1
