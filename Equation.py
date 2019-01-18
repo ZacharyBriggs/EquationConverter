@@ -4,13 +4,16 @@ class Equation():
         self.string = eqString
         self.LiteralDictionary = []
         self.ClauseArray = []
+        self.findClauses()
+        self.findUniques()
 
     def setLiterals(self, literals):
         self.LiteralDictionary = []
         iterator = 0
-        for i in range(97, 97 + literals.__len__()-1):
+        for i in range(97, 97 + literals.__len__()):
             self.LiteralDictionary.append([chr(i), literals[iterator]])
             iterator += 1
+        self.LiteralDictionary.sort()
 
     def addClause(self, clause):
         self.ClauseArray.append(Clause(clause))
