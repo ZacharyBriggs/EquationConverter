@@ -1,6 +1,6 @@
 import random
 from Equation import Equation
-from Converter import Converter
+
 class Gene():
     def __init__(self, values, eqString):
         self.values = values
@@ -27,23 +27,8 @@ class Gene():
                 break
         for x in range(pivot, other.values.__len__()):
             newGene.append(other.values[x])
-        return newGene
+        return Gene(newGene, self.eq.string)
 
     def determineFitness(self):
         self.fitness = self.eq.solve()
         return self.fitness
-
-'''doc = open("text.txt",'r')
-eq = Equation(doc.read())
-eq.findClauses()
-eq.findUniques()
-numbers = [1,0,1,1,1,0]
-numbers2 = [0,1,0,1,0,1]
-literals = []
-gene = Gene(numbers, eq)
-gene.determineFitness()
-gene2 = Gene(numbers2, eq)
-gene2.determineFitness()
-gene.mutate(25)
-crossGene = gene.crossover(gene2,2)
-a=1'''

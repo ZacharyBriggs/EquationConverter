@@ -1,6 +1,7 @@
 from Gene import Gene
 from Equation import Equation
 import random
+
 def RouletteWheel(nums):
     listSum = sum(nums)
     rand = random.randint(0,listSum)
@@ -11,8 +12,6 @@ def RouletteWheel(nums):
             chosen = i
             break
     return chosen
-
-
 
 class GeneticAlgorithm():
     def __init__(self):
@@ -36,8 +35,8 @@ doc = open("text.txt",'r')
 eq = Equation(doc.read())
 ga = GeneticAlgorithm()
 ga.generatePop(4, eq.LiteralDictionary.__len__(), eq.string)
-ga.determinePopFitness()
 while(True):
+    ga.determinePopFitness()
     answer = None
     fitnessList = []
     for gene in ga.population:
@@ -46,8 +45,12 @@ while(True):
         fitnessList.append(gene.fitness)
     if answer is not None:
         break
-    parentA = ga.population[RouletteWheel(fitnessList)]
-    parentB = ga.population[RouletteWheel(fitnessList)]
+    roulette = RouletteWheel(fitnessList)
+    parentA = ga.population[roulette]
+    roulette2 = RouletteWheel(fitnessList)
+    while(roulette == roulette2):
+        roulette2 = RouletteWheel(fitnessList)
+    parentB = ga.population[roulette2]
     parentA.mutate(25)
     parentB.mutate(25)
     kidA = parentA.crossover(parentB,5)
