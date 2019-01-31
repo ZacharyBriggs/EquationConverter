@@ -7,6 +7,7 @@ class Equation():
         self.findClauses()
         self.findUniques()
 
+    '''Takes in a list of tuples and then assigns those tuples to the literal dictionary'''
     def setLiterals(self, literals):
         self.LiteralDictionary = []
         iterator = 0
@@ -15,9 +16,11 @@ class Equation():
             iterator += 1
         self.LiteralDictionary.sort()
 
+    '''Appends a clause to the clause array'''
     def addClause(self, clause):
         self.ClauseArray.append(Clause(clause))
 
+    '''Finds all the clauses in the equation'''
     def findClauses(self):
         eqList = list(self.string)
         inc = -1
@@ -34,6 +37,7 @@ class Equation():
                         self.addClause(clause)
                         break
 
+    '''Finds all the literals in the equation and then removes any redundent literals'''
     def findUniques(self):
         for item in list(self.string):
             for i in range(97,123):
@@ -47,10 +51,12 @@ class Equation():
             for i in range(0,num-1):
                 self.LiteralDictionary.remove(currentLiteral)
 
+    '''Calls convert on each clause in the equation'''
     def convert(self):
         for clause in self.ClauseArray:
             clause.convert(self.LiteralDictionary)
 
+    '''Calls solve on each clause in the equation and returns the number of trues returned.'''
     def solve(self):
         numT = 0
         for clause in self.ClauseArray:

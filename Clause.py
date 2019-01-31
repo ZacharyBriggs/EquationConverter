@@ -6,7 +6,7 @@ class Clause():
 
     def append(self,info):
         self.value.append(info)
-
+    '''Converts all the the characters in the clause into values based on the literals passed in'''
     def convert(self,literals):
         inc2 = -1
         for letter in self.value:
@@ -21,17 +21,13 @@ class Clause():
                         
         self.converted = ''.join(self.value)
 
+    '''Checks the converted clause string for any ones. If any ones are found in the string then it return true else it will return false.'''
     def solve(self):
         numT = 0
-        hasAnd = False
         for num in self.converted:
             if num == "1":
                 numT += 1
-            if num == "*":
-                hasAnd = True
-        if(numT > 0 and hasAnd == False):
-            return True
-        elif(numT == self.numLiterals and hasAnd == True):
+        if(numT > 0):
             return True
         else:
             return False
